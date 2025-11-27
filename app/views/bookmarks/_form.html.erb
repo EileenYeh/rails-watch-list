@@ -1,0 +1,22 @@
+<%# app/views/bookmarks/_form.html.erb %>
+<%= simple_form_for [@list, @list_id, @bookmark] do |f| %>
+  <%= f.association :movie,
+        collection: Movie.all.order(:title),
+        prompt: "Choose a movie" %>
+
+  <%= f.input :comment,
+        placeholder: "Enter a comment (min 6 characters)" %>
+
+  <%# 显示错误信息 %>
+  <% if @bookmark.errors.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% @bookmark.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.submit "Add to list", class: "btn btn-primary" %>
+<% end %>

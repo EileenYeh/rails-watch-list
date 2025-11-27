@@ -1,0 +1,26 @@
+<%# app/views/lists/show.html.erb %>
+<div class="container mt-4">
+  <h1><%= @list.name %></h1>
+
+  <%# 只显示已保存的书签（有id的） %>
+  <% @list.bookmarks.each do |bookmark| %>
+    <% if bookmark.persisted? %>  <%# 新增这行检查 %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= bookmark.movie.title %></h5>
+          <p class="card-text"><%= bookmark.comment %></p>
+          <%= link_to "Delete",
+                bookmark_path(bookmark),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                class: "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# 添加新电影的表单 %>
+  <div class="mt-5">
+    <h3>Add a new movie</h3>
+    <%= render "bookmarks/form" %>
+  </div>
+</div>

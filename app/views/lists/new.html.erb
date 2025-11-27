@@ -1,0 +1,11 @@
+<%# app/views/lists/new.html.erb %>
+<div class="container mt-4">
+  <h1>Create a new list</h1>
+
+  <%= simple_form_for @list do |f| %>
+    <%= f.input :name, placeholder: "Enter list name" %>
+    <%= f.submit "Create list", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to "Back to lists", lists_path, class: "btn btn-secondary mt-3" %>
+</div>
